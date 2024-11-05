@@ -1,7 +1,11 @@
 import os
-from flask import Flask, request, render_template, redirect
+
 from lib.database_connection import get_flask_database_connection
-from lib.listing_repository import ListingRepository, Listing
+from lib.listing_repository import *
+from lib.listing import *
+from lib.user_repository import *
+from lib.user import *
+from flask import Flask, request, render_template, redirect
 
 # Create a new Flask app
 app = Flask(__name__)
@@ -20,6 +24,7 @@ def get_index():
 def get_add_listing():
     return render_template('add_listing.html')
 
+add_listing_branch
 @app.route("/listings/new", methods=['POST'])
 def post_new_listing():
     connection = get_flask_database_connection(app)
@@ -38,8 +43,19 @@ def post_new_listing():
     repository.create(listing)
     return redirect(f"/index")
 
+# get all listings on homepage
+@app.route('/home', methods=['GET'])
+def get_listings():
+    connection = get_flask_database_connection(app)
+    repository = ListingRepository(connection)
+    listings = repository.all()
+    return render_template('home.html', listings=listings)
 
-
+# add anchors to listings page
+@app.route('/home/<int:listing_id>', methods=['GET'])
+def show_listing(listing_id):
+    connection = get_flask_database_connection(app)
+    repository = ListingRepository(connection)
 
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database
