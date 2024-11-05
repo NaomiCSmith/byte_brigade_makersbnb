@@ -91,6 +91,11 @@
         <!-- Listing Details Section -->
         <h2>Listing Details</h2>
         <form action="/add_listing" method="POST">
+        {% if errors %}
+        <div class = "t-class">
+            Your listing submission has errors: {{errors}}
+        </div>
+        {% endif %}
             <p>
                 <label for="name">Listing Name</label>
                 <span class="instructions">Enter a name that describes your listing, e.g., 'Rose Cottage'</span>
