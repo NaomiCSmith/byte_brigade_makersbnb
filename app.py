@@ -15,6 +15,10 @@ app = Flask(__name__)
 def get_index():
     return render_template('index.html')
 
+@app.route('/add_listing', methods=['GET'])
+def get_add_listing():
+    return render_template('add_listing.html')
+
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database
 # if started in test mode.
