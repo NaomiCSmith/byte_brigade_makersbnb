@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>MakersBnB Listings</title>
+    </head>
+    
+    <body>
+        <h1>MakersBnB</h1>
+        <h2>Discover your next getaway!</h2>
+    {% for listing in listings %}
+        <div>
+        <h3>
+            <a href="/home/{{listing.id}}">{{listing.id}}: {{listing.name}}</a>
+        </h3>
+        </div>
+    
+    {% endfor %}
+    </body>
+
+
+</html>
