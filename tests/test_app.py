@@ -12,8 +12,8 @@ def test_get_index(page, test_web_address):
     # We look at the <p> tag
     p_tag = page.locator("p")
 
-    # We assert that it has the text "This is the homepage."
-    expect(p_tag).to_have_text("This is the homepage.")
+    # We assert that it has the text "This is the home."
+    expect(p_tag).to_have_text("This is the home.")
 
 # Test title
 def test_get_add_listing_page(page, test_web_address):
@@ -58,3 +58,20 @@ def test_submit_button(page, test_web_address):
 #     page.fill("input[name=price_per_night]", "100")
 #     page.click("text=Add listing")
     # complete when you know what home page looks like
+
+
+# test home listings
+"""
+GET /home
+When: I open up the home
+Then: I receive a list of all listings in the repository
+"""
+def test_get_listings(db_connection, page, test_web_address):
+    db_connection.seed("seeds/makersbnb.sql")
+    page.goto(f"http://{test_web_address}/home")
+    div_tags = page.locator("div")
+    expect(div_tags).to_have_text([
+      "1: Alpine Retreat Lodge",
+      "2: City Chic Loft",
+      "3: Seaside Serenity"
+    ])
