@@ -5,7 +5,7 @@ from lib.listing_repository import *
 from lib.listing import *
 from lib.user_repository import *
 from lib.user import *
-import datetime
+from datetime import datetime
 
 
 # Create a new Flask app
@@ -19,7 +19,7 @@ def get_add_listing():
 
 
 
-
+# request a booking page
 @app.route('/request_booking/<id>', methods=['GET'])
 def get_request_booking(id):
     connection = get_flask_database_connection(app)
@@ -34,17 +34,42 @@ def get_request_booking(id):
 
     return render_template('request_booking.html', id=id, name=name, description=description, price=price)
 
+
+
+
+
+# request a booking
 @app.route('/request_booking/<id>', methods=['POST'])
 def post_request_booking(id):
-    
     start_date = request.form.get("start_date")
     end_date = request.form.get("end_date")
 
-    # need bookings table
+    start_date_datetime = datetime.strptime(start_date, "%Y-%m-%d")
+    end_date_datetime = datetime.strptime(end_date, "%Y-%m-%d")
+
+
+    if has_invalid_date_parameters(request.form):
+        return "Both start and end dates are required!", 400
+    elif start_date_datetime.date() < datetime.now().date():
+        return "Start date cannot be in the past"
+    elif end_date_datetime <= start_date_datetime:
+        return "End date must be after start date"
+        
 
     return redirect(url_for('request_booking_successful', id=id, start_date=start_date, end_date=end_date))
 
-# sucessful booking page
+def has_invalid_date_parameters(form):
+    return 'start_date' not in form or 'end_date' not in form
+
+
+
+
+
+
+
+
+
+# booking confirmation page
 @app.route('/request_booking_successful', methods=['GET'])
 def request_booking_successful():
     id = request.args.get("id")
