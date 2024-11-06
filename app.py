@@ -18,6 +18,8 @@ def get_add_listing():
     return render_template('add_listing.html')
 
 
+
+
 @app.route('/request_booking/<id>', methods=['GET'])
 def get_request_booking(id):
     connection = get_flask_database_connection(app)

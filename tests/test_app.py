@@ -78,9 +78,11 @@ def test_get_request_booking_page(page, test_web_address):
 def test_get_listing_information(page, test_web_address):
     id = 3
     page.goto(f"http://{test_web_address}/request_booking/{id}")
-    listing_name = page.locator("p").nth(0).inner_text()
-    description = page.locator("p").nth(1).inner_text()
-    price = page.locator("p").nth(2).inner_text()
+
+    listing_name = page.locator("p").nth(0)
+    description = page.locator("p").nth(1)
+    price = page.locator("p").nth(2)
+
     expect(listing_name).to_have_text("Listing name: Seaside Serenity")
     expect(description).to_have_text("Description: A peaceful coastal retreat with stunning ocean views, a private balcony, and luxurious modern amenities.")
     expect(price).to_have_text("Price per night: £100")
