@@ -87,10 +87,14 @@
 <body>
     <div class="form-container">
         <h1>Create a New Listing</h1>
-
+        {% if errors %}
+        <div class = "t-class">
+            Your listing submission has errors: {{errors}}
+        </div>
+        {% endif %}
         <!-- Listing Details Section -->
         <h2>Listing Details</h2>
-        <form action="/add_listing" method="POST">
+        <form action="/listings/new" method="POST">
             <p>
                 <label for="name">Listing Name</label>
                 <span class="instructions">Enter a name that describes your listing, e.g., 'Rose Cottage'</span>
@@ -106,9 +110,9 @@
             <!-- Pricing Information Section -->
             <h2>Pricing Information</h2>
             <p>
-                <label for="price_per_night">Price per Night (GBP)</label>
+                <label for="price">Price per Night (GBP)</label>
                 <span class="instructions">Specify the nightly rate for renting this listing.</span>
-                <input type="text" name="price_per_night" id="price_per_night">
+                <input type="text" name="price" id="price">
             </p>
 
             <!-- Submit Button -->
