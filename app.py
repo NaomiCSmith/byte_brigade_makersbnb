@@ -12,13 +12,6 @@ app = Flask(__name__)
 
 # == Your Routes Here ==
 
-# GET /index
-# Returns the homepage
-# Try it:
-#   ; open http://localhost:5001/index
-@app.route('/index', methods=['GET'])
-def get_index():
-    return render_template('index.html')
 
 @app.route('/add_listing', methods=['GET'])
 def get_add_listing():
