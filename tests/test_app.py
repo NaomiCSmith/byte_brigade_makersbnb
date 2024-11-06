@@ -40,7 +40,7 @@ def test_labels_and_instructions(page, test_web_address):
     expect(page.locator("span.instructions").nth(1)).to_have_text("Describe the features and atmosphere of your listing, e.g., 'A cozy cottage with a beautiful garden view.'")
     expect(page.locator("span.instructions").nth(2)).to_have_text("Specify the nightly rate for renting this listing.")
 
-# Test subbmit button
+# Test submit button
 def test_submit_button(page, test_web_address):
     page.goto(f"http://{test_web_address}/add_listing")
     submit_button = page.locator("input[type='submit']")
@@ -58,3 +58,32 @@ def test_submit_button(page, test_web_address):
 #     page.fill("input[name=price_per_night]", "100")
 #     page.click("text=Add listing")
     # complete when you know what home page looks like
+
+
+
+# renders the request a booking page with correct title
+def test_get_request_booking_page(page, test_web_address):
+    id = 1
+
+    page.goto(f"http://{test_web_address}/request_booking/{id}")
+
+    h1_tag = page.locator("h1")
+
+    # We assert that it has the text
+    expect(h1_tag).to_have_text("Request a booking")
+
+# checks for correct listing information - name, description, price
+def test_get_listing_information(page, test_web_address):
+    id = 3
+
+    page.goto(f"http://{test_web_address}/request_booking/{id}")
+
+    listing_name = page.locator("p").nth(0).inner_text()
+
+    description = page.locator("p").nth(1).inner_text()
+
+    price = page.locator("p").nth(2).inner_text()
+
+    expect(listing_name).to_have_text("Listing name: Seaside Serenity")
+    expect(description).to_have_text("Description: A peaceful coastal retreat with stunning ocean views, a private balcony, and luxurious modern amenities.")
+    expect(price).to_have_text("Price per night: £100")
