@@ -17,5 +17,4 @@ def test_equality():
 
 def test_bookings_format():
     booking = Booking(1, 2, 3, '2024-02-02', '2024-02-03', 'confirmed')
-
     assert str(booking) == "Booking(1, 2, 3, 2024-02-02, 2024-02-03, confirmed)"
