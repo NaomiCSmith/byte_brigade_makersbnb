@@ -1,0 +1,97 @@
+/* General*/
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: futura;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #ebf0f4;
+}
+
+nav
+
+/* --------------------- */
+
+/* Card styling */
+.card {
+    width: 300px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-container {
+    width: 100%;
+    height: 100%;
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+}
+
+.image-container {
+    width: 250px;
+    height: 250px;
+}
+
+.image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+.card-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.card-description {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+
+/* --------------------- */
+
+/* Button styling */
+.card-button {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    font-size: 0.9em;
+    font-weight: 100;
+    color: #00D0A2;
+    background-color: #fff;
+    border: 1px solid #00D0A2;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.card-button:hover {
+    background-color: #00D0A2;
+    color: #fff;
+}
+
+.plus-icon {
+    margin-left: 8px;
+    font-weight: bold;
+    font-size: 1.1em;
+}
