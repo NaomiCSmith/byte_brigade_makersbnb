@@ -12,14 +12,6 @@ app = Flask(__name__)
 
 # == Your Routes Here ==
 
-# GET /home
-# Returns the homepage
-# Try it:
-#   ; open http://localhost:5001/home
-# @app.route('/home', methods=['GET'])
-# def get_home():
-#     return render_template('home.html')
-
 @app.route('/add_listing', methods=['GET'])
 def get_add_listing():
     return render_template('add_listing.html')
