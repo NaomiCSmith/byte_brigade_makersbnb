@@ -23,11 +23,11 @@ class Listing:
     def generate_errors(self):
         errors = []
         if self.name is None or self.name == "":
-            errors.apppend("")
+            errors.append("Please add a name")
         if self.description is None or self.description == "":
-            errors.apppend("")
+            errors.append("Please add a description")
         if self.price is None or not isinstance(self.price, int):
-            errors.apppend("")
+            errors.append("Please ad a nightly price")
         if len(errors) == 0:
             return None
         else:
