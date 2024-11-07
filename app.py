@@ -3,7 +3,7 @@ from flask import Flask, request, render_template, redirect, url_for
 from lib.database_connection import get_flask_database_connection
 from lib.listing import Listing
 from lib.listing_repository import ListingRepository
-import datetime
+from datetime import datetime
 from lib.user_repository import UserRepository
 from lib.user import User
 
@@ -127,8 +127,7 @@ def create_account():
 def has_invalid_user_parameters(form):
     return 'username' not in form or \
         'email' not in form or \
-            'password' not in form
-            
+            'password' not in form            
             
 @app.route('/landing')
 def index():
@@ -137,6 +136,7 @@ def index():
 @app.route('/login')
 def login():
     return render_template('login.html')
+
 
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database

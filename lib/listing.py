@@ -11,7 +11,11 @@ class Listing:
     
     def __repr__(self):
         return f"Listing({self.id}, {self.name}, {self.description}, {self.price}, {self.user_id})"
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 8924b9e435f183268c7d6efae24f8a01a78b494d
     def is_valid(self):
         if self.name is None or self.name == "":
             return False
@@ -20,7 +24,11 @@ class Listing:
         if self.price is None or not isinstance(self.price, int):
             return False
         return True
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 8924b9e435f183268c7d6efae24f8a01a78b494d
     def generate_errors(self):
         errors = []
         if self.name is None or self.name == "":

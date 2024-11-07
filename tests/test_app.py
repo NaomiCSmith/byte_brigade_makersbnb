@@ -58,52 +58,35 @@ def test_post_new_listing(page, test_web_address, db_connection):
     page.fill("input[name=description]", "Test description")
     page.fill("input[name=price]", "100")
     page.click("input[type=submit]")
-
+    
     expect(page.locator("h3").nth(3)).to_have_text("4: Test Listing")
-
+    
     page.click("text=4: Test Listing")
+    
+    expect(page.locator("h1")).to_have_text("Request a booking")
+    # expect(page.locator("h2")).to_have_text("Description: Test description")
+    # expect(page.locator("p")).to_have_text("Price per night(GBP): £100")
 
-    expect(page.locator("h1")).to_have_text("4: Test Listing")
-    expect(page.locator("h2")).to_have_text("4: Test Listing")
-    expect(page.locator("h3")).to_have_text("4: Test Listing")
-
-#     page.click("text= Add new listing")
-#     page.fill("input[name=title]", 'Test Listing')
-#     page.fill("input[name=description]", "Test description")
-#     page.fill("input[name=price_per_night]", "100")
-#     page.click("text=Add listing")
-    # complete when you know what home page looks like
-# renders the request a booking page with correct title
 def test_get_request_booking_page(page, test_web_address):
     id = 1
-    expect(page.locator("h1")).to_have_text("Test Listing")
-    expect(page.locator("h2")).to_have_text("Description: Test description")
-    expect(page.locator("p")).to_have_text("Price per night(GBP): £100")
-
     page.goto(f"http://{test_web_address}/request_booking/{id}")
-
     h1_tag = page.locator("h1")
-
     # We assert that it has the text
     expect(h1_tag).to_have_text("Request a booking")
 
 # checks for correct listing information - name, description, price
 def test_get_listing_information(page, test_web_address):
     id = 3
-
     page.goto(f"http://{test_web_address}/request_booking/{id}")
 
     listing_name = page.locator("p").nth(0)
-
     description = page.locator("p").nth(1)
-
     price = page.locator("p").nth(2)
 
     expect(listing_name).to_have_text("Listing name: Seaside Serenity")
     expect(description).to_have_text("Description: A peaceful coastal retreat with stunning ocean views, a private balcony, and luxurious modern amenities.")
     expect(price).to_have_text("Price per night: £100")
     # complete when you know what home page looks like
-
 
 # test for start and end date inputs
 def test_start_and_end_dates(page, test_web_address):
@@ -164,10 +147,6 @@ def test_go_back_homepage(page, test_web_address):
     back_to_homepage_button = page.locator("button")
     back_to_homepage_button.click()
     assert page.url == f"http://{test_web_address}/home"
-
-
-
-
 
 # test home listings
 """

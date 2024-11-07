@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 from datetime import datetime
+=======
+from datetime import datetime, date
+>>>>>>> 8924b9e435f183268c7d6efae24f8a01a78b494d
 
 class Booking:
     def __init__(self, id, listing_id, user_id, check_in, check_out, status):
