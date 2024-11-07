@@ -71,8 +71,7 @@ def post_new_listing():
     name = request.form['name']
     description = request.form['description']
     price = int(request.form['price'])
-    # user_id = request.form['user_id'] #TODO#
-    user_id = 1
+    user_id = request.form['user_id']
     listing = Listing(None, name, description, price, user_id)
 
     if not listing.is_valid():

@@ -1,4 +1,4 @@
-from lib.listing import *
+from lib.listing import Listing
 
 class ListingRepository:
     def __init__(self, connection):
