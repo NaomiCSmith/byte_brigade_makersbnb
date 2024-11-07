@@ -128,6 +128,15 @@ def has_invalid_user_parameters(form):
     return 'username' not in form or \
         'email' not in form or \
             'password' not in form
+            
+            
+@app.route('/landing')
+def index():
+    return render_template('landing.html')
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
 
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database
