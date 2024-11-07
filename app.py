@@ -100,6 +100,28 @@ def show_listing(listing_id):
     listing = repository.find(listing_id)
     return render_template('/show_listing.html', listing=listing)
 
+
+# http://local:5001/sign_up
+@app.route('/sign_up', methods=['GET'])
+def get_sign_up_form():
+    return render_template('sign_up.html')
+
+@app.route('/sign_up', methods=['POST'])
+def create_account():
+    if has_invalid_user_parameters(request.form):
+        return "You need to submit a username, email address, and password to create an account", 400
+    connection = get_flask_database_connection(app)
+    repository = UserRepository(connection)
+    user = User(None, request.form['username'], request.form['email'], request.form['password'])
+    repository.create(user)
+    return render_template('successful_sign_up.html'), 200
+
+# invalid parameters
+def has_invalid_user_parameters(form):
+    return 'username' not in form or \
+        'email' not in form or \
+            'password' not in form
+
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database
 # if started in test mode.
