@@ -27,8 +27,18 @@
             padding: 10px;
             border: 1px solid #ddd;
         }
+        .input-row {
+            display: flex;
+            justify-content: space-between;
+        }
         .input-group {
             margin: 10px 0;
+            width: 48%;
+        }
+        .centered-input-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
         }
         .input-group label {
             display: block;
@@ -36,13 +46,14 @@
             margin-bottom: 5px;
         }
         .input-group input {
-            width: 130px;
+            width: 100%;
             padding: 8px;
             font-size: 14px;
             border: 1px solid #ddd;
             border-radius: 4px;
         }
         .button {
+            display: inline-block;
             margin-top: 15px;
             padding: 10px 20px;
             background-color: #00D0A2;
@@ -55,11 +66,22 @@
         .button:hover {
             background-color: #00C08C;
         }
+        .error-message {
+            color: red;
+            margin: 10px 0;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <h1>Request a booking</h1>
+    {% if errors %}
+        <div class="error-message">
+            {% for error in errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
     <div class="listing-info">
         <p><strong>Listing name:</strong> {{ name }}</p>
         <p><strong>Description:</strong> {{ description }}</p>
@@ -67,17 +89,24 @@
     </div>
     
     <form action="/request_booking/{{ id }}" method="POST">
-        <div class="input-group">
-            <label for="start_date">Start Date</label>
-            <input type="date" id="start_date" name="start_date" required>
+        <div class="input-row">
+            <div class="input-group">
+                <label for="start_date">Start Date</label>
+                <input type="date" id="start_date" name="start_date" required>
+            </div>
+            <div class="input-group">
+                <label for="end_date">End Date</label>
+                <input type="date" id="end_date" name="end_date" required>
+            </div>
         </div>
-        <div class="input-group">
-            <label for="end_date">End Date</label>
-            <input type="date" id="end_date" name="end_date" required>
+        <div class="centered-input-group">
+            <div class="input-group" style="width: 60%;">
+                <label for="user_id">User ID</label>
+                <input type="text" id="user_id" name="user_id" required>
+            </div>
         </div>
         <button type="submit" class="button">Request booking</button>
     </form>
-    
 </div>
 
 </body>
