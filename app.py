@@ -1,8 +1,8 @@
 import os
 from flask import Flask, request, render_template, redirect, url_for
 from lib.database_connection import get_flask_database_connection
-from lib.listing import *
-from lib.listing_repository import *
+from lib.listing import Listing
+from lib.listing_repository import ListingRepository
 import datetime
 
 # Create a new Flask app
@@ -21,9 +21,6 @@ def get_index():
 @app.route('/add_listing', methods=['GET'])
 def get_add_listing():
     return render_template('add_listing.html')
-
-
-
 
 @app.route('/request_booking/<id>', methods=['GET'])
 def get_request_booking(id):
@@ -63,9 +60,23 @@ def request_booking_successful():
 
     return render_template('request_booking_successful.html', start_date=start_date, end_date=end_date, name=listing_name)
 
+@app.route("/listings/new", methods=['POST'])
+def post_new_listing():
+    connection = get_flask_database_connection(app)
+    repository = ListingRepository(connection)
 
+    name = request.form['name']
+    description = request.form['description']
+    price = request.form['price']
+    user_id = request.form['user_id']
+    listing = Listing(None, name, description, price, user_id)
 
-
+    if not listing.is_valid():
+        errors = listing.generate_errors()
+        return render_template('templates/add_listing.html', errors=errors)
+    
+    repository.create(listing)
+    return redirect(f"/index")
 
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database
