@@ -138,6 +138,11 @@
         <br>
         <br>
         <h1>Create an Account</h1>
+        {% if errors %}
+        <div class = "errors-class">
+            {{errors}}
+        </div>
+        {% endif %}
 
         <!-- Listing Details Section -->
         <form action="/sign_up" method="POST">
