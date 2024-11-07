@@ -18,12 +18,21 @@ class UserRepository:
         row = rows[0]
         return User(row["id"], row["username"], row["email"], row["password"])
     
+    def find_by_email(self, email):
+        rows = self._connection.execute(
+            'SELECT * from users WHERE email = %s', [email])
+        if not rows:
+            return None
+        row = rows[0]
+        return User(row["id"], row["username"], row["email"], row["password"])
+
+    
     def create(self, user):
         if not user.username or not user.email or not user.password:
             return "You need to add a username, email, and password"
         self._connection.execute(
-            'INSERT INTO users (id, username, email, password) VALUES (%s, %s, %s, %s)', 
-            [user.id, user.username, user.email, user.password])
+            'INSERT INTO users (username, email, password) VALUES (%s, %s, %s)', 
+            [user.username, user.email, user.password])
         return None
     
     def delete(self, id):

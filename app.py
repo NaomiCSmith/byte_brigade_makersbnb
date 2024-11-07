@@ -17,9 +17,6 @@ app = Flask(__name__)
 def get_add_listing():
     return render_template('add_listing.html')
 
-
-
-
 @app.route('/request_booking/<id>', methods=['GET'])
 def get_request_booking(id):
     connection = get_flask_database_connection(app)
@@ -104,13 +101,20 @@ def get_sign_up_form():
 
 @app.route('/sign_up', methods=['POST'])
 def create_account():
-    if has_invalid_user_parameters(request.form):
-        return "You need to submit a username, email address, and password to create an account", 400
     connection = get_flask_database_connection(app)
     repository = UserRepository(connection)
-    user = User(None, request.form['username'], request.form['email'], request.form['password'])
+
+    username = request.form['username']
+    email = request.form['email']
+    password = request.form['password']
+    user = User(None, username, email, password)
+
+    if not user.is_valid(app):
+        errors = user.generate_errors(app)
+        return render_template('sign_up.html', errors=errors)
+
     repository.create(user)
-    return render_template('successful_sign_up.html'), 200
+    return redirect(f"/home")
 
 # invalid parameters
 def has_invalid_user_parameters(form):

@@ -168,3 +168,125 @@ def test_get_listings(db_connection, page, test_web_address):
         "3: Seaside Serenity"
     ])
 
+# test sign-up redirect 
+"""
+POST /sign_up
+When: I enter an email, a  password and a username and click 'submit'
+Then: I am redirtected to the home page.
+"""
+def test_post_user_sign_up_redirects_to_home(db_connection, page, test_web_address):
+    db_connection.seed("seeds/makersbnb.sql")
+    page.goto(f"http://{test_web_address}/sign_up")
+
+    expect(page.locator("h1")).to_have_text("Create an Account")
+
+    page.fill("input[name=username]", 'doug_91')
+    page.fill("input[name=email]", 'example@outlook.com')
+    page.fill("input[name=password]", 'Password1!!')
+    page.click("input[type=submit]")
+
+    expect(page.locator("h1")).to_have_text("MakersBnB")
+
+# test sign-up invalid password erroe message
+"""
+POST /sign_up
+When: I enter an email, an INVALID password and a username and click 'submit'
+Then: An error message is diaplayed at the top of the POST form page
+"""
+def test_post_user_sign_up_password_is_valid_too_short(db_connection, page, test_web_address):
+    db_connection.seed("seeds/makersbnb.sql")
+    page.goto(f"http://{test_web_address}/sign_up")
+
+    expect(page.locator("h1")).to_have_text("Create an Account")
+
+    page.fill("input[name=username]", 'doug_91')
+    page.fill("input[name=email]", 'example@outlook.com')
+    page.fill("input[name=password]", 'hello')
+    page.click("input[type=submit]")
+
+    expect(page.locator(".errors-class")).to_have_text("* Your password must be at least 8 characters long")
+
+def test_post_user_sign_up_password_is_valid_no_spec_char(db_connection, page, test_web_address):
+    db_connection.seed("seeds/makersbnb.sql")
+    page.goto(f"http://{test_web_address}/sign_up")
+
+    expect(page.locator("h1")).to_have_text("Create an Account")
+
+    page.fill("input[name=username]", 'doug_91')
+    page.fill("input[name=email]", 'example@outlook.com')
+    page.fill("input[name=password]", 'Password')
+    page.click("input[type=submit]")
+
+    expect(page.locator(".errors-class")).to_have_text("* Your password must contain at least one of the following special character ('!', '@', '$', '%' or '&')")
+
+def test_post_user_sign_up_password_is_valid_empty_input(db_connection, page, test_web_address):
+    db_connection.seed("seeds/makersbnb.sql")
+    page.goto(f"http://{test_web_address}/sign_up")
+
+    expect(page.locator("h1")).to_have_text("Create an Account")
+
+    page.fill("input[name=username]", 'doug_91')
+    page.fill("input[name=email]", 'example@outlook.com')
+    page.fill("input[name=password]", '')
+    page.click("input[type=submit]")
+
+    expect(page.locator(".errors-class")).to_have_text("* Please add a valid password")
+
+
+# test sign-up invalid email error message
+"""
+POST /sign_up
+When: I enter an INVALID email, a password and a username and click 'submit'
+Then: An error message is diaplayed at the top of the POST form page
+"""
+def test_post_user_sign_up_email_is_valid_empty_input(db_connection, page, test_web_address):
+    db_connection.seed("seeds/makersbnb.sql")
+    page.goto(f"http://{test_web_address}/sign_up")
+
+    expect(page.locator("h1")).to_have_text("Create an Account")
+
+    page.fill("input[name=username]", 'doug_91')
+    page.fill("input[name=email]", "")
+    page.fill("input[name=password]", 'Password1!')
+    page.click("input[type=submit]")
+
+    expect(page.locator(".errors-class")).to_have_text("* Please add a valid email")
+
+def test_post_user_sign_up_email_is_valid_no_at(db_connection, page, test_web_address):
+    db_connection.seed("seeds/makersbnb.sql")
+    page.goto(f"http://{test_web_address}/sign_up")
+
+    expect(page.locator("h1")).to_have_text("Create an Account")
+
+    page.fill("input[name=username]", 'doug_91')
+    page.fill("input[name=email]", "example.com")
+    page.fill("input[name=password]", 'Password1!')
+    page.click("input[type=submit]")
+
+    expect(page.locator(".errors-class")).to_have_text("* Please add a valid email")
+
+def test_post_user_sign_up_email_is_valid_no_at(db_connection, page, test_web_address):
+    db_connection.seed("seeds/makersbnb.sql")
+    page.goto(f"http://{test_web_address}/sign_up")
+
+    expect(page.locator("h1")).to_have_text("Create an Account")
+
+    page.fill("input[name=username]", 'doug_91')
+    page.fill("input[name=email]", "example@outlook")
+    page.fill("input[name=password]", 'Password1!')
+    page.click("input[type=submit]")
+
+    expect(page.locator(".errors-class")).to_have_text("* Please add a valid email")
+
+def test_post_user_sign_up_email_is_valid_email_already_exists(db_connection, page, test_web_address):
+    db_connection.seed("seeds/makersbnb.sql")
+    page.goto(f"http://{test_web_address}/sign_up")
+
+    expect(page.locator("h1")).to_have_text("Create an Account")
+
+    page.fill("input[name=username]", 'doug_91')
+    page.fill("input[name=email]", "doug@email.com")
+    page.fill("input[name=password]", 'Password1!')
+    page.click("input[type=submit]")
+
+    expect(page.locator(".errors-class")).to_have_text("* This email already exists. Please use a unique email")
