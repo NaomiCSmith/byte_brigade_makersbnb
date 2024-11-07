@@ -104,6 +104,71 @@ def test_get_listing_information(page, test_web_address):
     expect(price).to_have_text("Price per night: £100")
     # complete when you know what home page looks like
 
+
+# test for start and end date inputs
+def test_start_and_end_dates(page, test_web_address):
+    id = 2
+    page.goto(f"http://{test_web_address}/request_booking/{id}")
+
+    start_date_input = page.locator("input#start_date")
+    end_date_input = page.locator("input#end_date")
+
+    start_date_input.fill("2024-01-01")
+    end_date_input.fill("2024-01-09")
+
+    expect(start_date_input).to_have_value("2024-01-01")
+    expect(end_date_input).to_have_value("2024-01-09")
+
+
+
+    start_date_label = page.locator("label").nth(0)
+    end_date_label = page.locator("label").nth(1)
+
+    expect(start_date_label).to_have_text("Start Date")
+    expect(end_date_label).to_have_text("End Date")
+
+# tests if request booking button redirects to confirmation page with correct text
+def test_requesting_a_booking_redirects(page, test_web_address):
+    id = 2
+    page.goto(f"http://{test_web_address}/request_booking/{id}")
+
+    start_date_input = page.locator("input#start_date")
+    end_date_input = page.locator("input#end_date")
+
+    start_date_input.fill("2024-01-01")
+    end_date_input.fill("2024-01-09")
+
+    request_booking_button = page.locator("button")
+    request_booking_button.click()
+
+    booking_text_with_name = page.locator("p").nth(0)
+    booking_dates = page.locator("p").nth(1)
+
+    expect(booking_text_with_name).to_have_text("Your booking request for City Chic Loft is confirmed.")
+    expect(booking_dates) .to_have_text("Dates: 2024-01-01 to 2024-01-09")
+
+# tests if go back to hompepage works on booking confirmation page
+def test_go_back_homepage(page, test_web_address):
+    id = 1
+    page.goto(f"http://{test_web_address}/request_booking/{id}")
+
+    start_date_input = page.locator("input#start_date")
+    end_date_input = page.locator("input#end_date")
+
+    start_date_input.fill("2024-01-01")
+    end_date_input.fill("2024-01-09")
+
+    request_booking_button = page.locator("button")
+    request_booking_button.click()
+
+    back_to_homepage_button = page.locator("button")
+    back_to_homepage_button.click()
+    assert page.url == f"http://{test_web_address}/home"
+
+
+
+
+
 # test home listings
 """
 GET /home
