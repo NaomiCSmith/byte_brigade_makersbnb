@@ -24,12 +24,12 @@
   <!-- Login Form -->
   <div class="form-container">
     <h2>Login</h2>
-    <form action="#">
+    <form action="/login" method="POST">
       <div class="field">
-        <input type="text" placeholder="Email Address" required>
+        <input type="text" placeholder="Email Address" name="email" required>
       </div>
       <div class="field">
-        <input type="password" placeholder="Password" required>
+        <input type="password" placeholder="Password" name="password" required>
       </div>
       <div class="field btn">
         <input type="submit" value="Login">

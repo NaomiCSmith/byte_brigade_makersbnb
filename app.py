@@ -137,6 +137,23 @@ def index():
 def login():
     return render_template('login.html')
 
+@app.route('/login', methods=['POST'])
+def login_account():
+    connection = get_flask_database_connection(app)
+    repository = UserRepository(connection)
+
+    email = request.form.get('email')
+    password_value = request.form.get('password')
+    
+    user_check = repository.find_by_email(email)
+    if user_check is None:
+        return render_template('sign_up.html')
+
+    if user_check.password != password_value:
+        return render_template('login.html')
+    return redirect(f"/home")
+
+
 
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database
