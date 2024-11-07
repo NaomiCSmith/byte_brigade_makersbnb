@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 
 class Booking:
     def __init__(self, id, listing_id, user_id, check_in, check_out, status):
