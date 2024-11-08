@@ -116,18 +116,22 @@ def test_requesting_a_booking_redirects(page, test_web_address):
 
     start_date_input = page.locator("input#start_date")
     end_date_input = page.locator("input#end_date")
+    user_id_input = page.locator("input#user_id")
 
     start_date_input.fill("2024-01-01")
     end_date_input.fill("2024-01-09")
+    user_id_input.fill(2)
 
     request_booking_button = page.locator("button")
     request_booking_button.click()
 
+    booking_request_pending_h1 = page.locator("h1")
     booking_text_with_name = page.locator("p").nth(0)
     booking_dates = page.locator("p").nth(1)
 
+    expect(booking_request_pending_h1).to_have_text("Booking Request Pending...")
     expect(booking_text_with_name).to_have_text("Your booking request for City Chic Loft is confirmed.")
-    expect(booking_dates) .to_have_text("Dates: 2024-01-01 to 2024-01-09")
+    expect(booking_dates).to_have_text("Dates: 2024-01-01 to 2024-01-09")
 
 # tests if go back to hompepage works on booking confirmation page
 def test_go_back_homepage(page, test_web_address):

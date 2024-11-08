@@ -65,6 +65,25 @@
     color: #00796b; /* Green on hover */
   }
 
+  .button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #00796b;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.button:hover {
+    background-color: #004d40;
+}
+.field.btn {
+    text-align: center;
+}
+
   .splash {
     height: 90vh;
     display: flex;
@@ -82,6 +101,12 @@
     margin-bottom: 0.5em;
   }
   
+  .form-container h2 {
+    text-align: center;
+    color: #00796b;
+    margin-bottom: 20px;
+  }
+
   .splash-content p {
     font-size: 1.2em;
     color: #fff;
@@ -96,12 +121,6 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
-  .form-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #00796b;
-  }
-  
   .form-container .field {
     margin-bottom: 15px;
   }
@@ -113,6 +132,41 @@
     border-radius: 5px;
   }
   
+  .form-container .listing-info {
+    text-align: left;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-container .field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-container .field input[type="date"],
+.form-container .field input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.form-container .field.btn input {
+    background: #00796b;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.form-container .field.btn input:hover {
+    background: #004d40;
+}
+
   .form-container .field.btn input {
     background: #00796b;
     color: #fff;

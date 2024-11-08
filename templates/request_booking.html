@@ -72,6 +72,9 @@
         <h1 style="color: #00D0A2; font-family: futura;"> £{{ price }}</h1>
         <p>Price per night</strong>
             <br>
+        {% for error in errors %}
+            <p class="error">{{ error }}</p>
+        {% endfor %}
     <form action="/request_booking/{{ id }}" method="POST">
         <div class="input-group" style="font-family: futura;">
             <label for="start_date">Start Date</label>
@@ -88,3 +91,6 @@
 
 </body>
 </html>
+<!--     
+            <li><a href="/login">Login</a></li>
+            <li><a href="/sign_up">Signup</a></li>  -->

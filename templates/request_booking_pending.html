@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Request Pending</title>
+    <link rel="stylesheet" href="../static/style.css">
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="/landing" class="logo">
+            <img src="../static/images/makersbnb.svg" alt="MakersBnB Logo">
+          </a>
+          <ul class="nav-links">
+
+
+          </ul>
+        </nav>
+      </header>
+    <div class="form-container">
+        <h1 style="text-align: center; color: #FF8C00">Booking Request Pending...</h1><br>
+        <p>Your booking request for <strong>{{ name }}</strong> is currently under review.</p><br>
+        <p>Requested Dates: <strong>{{ start_date }}</strong> to <strong>{{ end_date }}</strong></p><br>
+        <div class="field btn">
+            <a href="/home" class="button">Back to Homepage</a>
+        </div>
+    </div>
+</body>
+</html>

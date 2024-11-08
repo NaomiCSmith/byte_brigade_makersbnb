@@ -1,11 +1,14 @@
 import os
 from flask import Flask, request, render_template, redirect, url_for
 from lib.database_connection import get_flask_database_connection
-from lib.listing import Listing
-from lib.listing_repository import ListingRepository
+from lib.listing_repository import *
+from lib.listing import *
+from lib.user_repository import *
+from lib.user import *
 from datetime import datetime
-from lib.user_repository import UserRepository
-from lib.user import User
+from lib.booking import *
+from lib.booking_repository import *
+
 
 # Create a new Flask app
 app = Flask(__name__)
@@ -40,17 +43,35 @@ def get_request_booking(id):
 
 @app.route('/request_booking/<id>', methods=['POST'])
 def post_request_booking(id):
+    connection = get_flask_database_connection(app)
     
     start_date = request.form.get("start_date")
     end_date = request.form.get("end_date")
+    user_id = request.form.get("user_id")
 
-    # need bookings table
+    listing_repository = ListingRepository(connection)
+    listing = listing_repository.find(id)
 
-    return redirect(url_for('request_booking_successful', id=id, start_date=start_date, end_date=end_date))
+    id = listing.id
+    name = listing.name
+    description = listing.description
+    price = listing.price
 
-# sucessful booking page
-@app.route('/request_booking_successful', methods=['GET'])
-def request_booking_successful():
+    booking = Booking(None, id, user_id, start_date, end_date, "pending")
+    errors = booking.generate_errors()
+
+    if not booking.is_valid():
+        print(errors)
+        return render_template('request_booking.html', id=id, name=name, description=description, price=price, errors=errors)
+
+    booking_repository = BookingRepository(connection)
+    booking_repository.create(booking)
+
+    return redirect(url_for('request_booking_pending', id=id, start_date=start_date, end_date=end_date, errors=errors))
+
+# pending booking page
+@app.route('/request_booking_pending', methods=['GET'])
+def request_booking_pending():
     id = request.args.get("id")
     start_date = request.args.get("start_date")
     end_date = request.args.get("end_date")
@@ -60,7 +81,7 @@ def request_booking_successful():
     listing = listing_repository.find(id)
     listing_name = listing.name
 
-    return render_template('request_booking_successful.html', start_date=start_date, end_date=end_date, name=listing_name)
+    return render_template('request_booking_pending.html', start_date=start_date, end_date=end_date, name=listing_name)
 
 # add_listing_branch
 @app.route("/listings/new", methods=['POST'])
