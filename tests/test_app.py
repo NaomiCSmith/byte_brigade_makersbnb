@@ -70,9 +70,9 @@ def test_post_new_listing(page, test_web_address, db_connection):
 def test_get_request_booking_page(page, test_web_address):
     id = 1
     page.goto(f"http://{test_web_address}/request_booking/{id}")
-    h2_tag = page.locator("h2")
+    h1_tag = page.locator("h1")
     # We assert that it has the text
-    expect(h2_tag).to_have_text("Request a booking")
+    expect(h1_tag).to_have_text("Request a booking")
 
 # checks for correct listing information - name, description, price
 def test_get_listing_information(page, test_web_address):
@@ -102,6 +102,8 @@ def test_start_and_end_dates(page, test_web_address):
     expect(start_date_input).to_have_value("2024-01-01")
     expect(end_date_input).to_have_value("2024-01-09")
 
+
+
     start_date_label = page.locator("label").nth(0)
     end_date_label = page.locator("label").nth(1)
 
@@ -119,19 +121,18 @@ def test_requesting_a_booking_redirects(page, test_web_address):
 
     start_date_input.fill("2024-01-01")
     end_date_input.fill("2024-01-09")
-    user_id_input.fill("2")
+    user_id_input.fill(2)
 
-   # request_booking_button = page.locator("input[type='submit']")
-   # request_booking_button.click()
-    page.click("text=Request Booking")
+    request_booking_button = page.locator("button")
+    request_booking_button.click()
 
     booking_request_pending_h1 = page.locator("h1")
     booking_text_with_name = page.locator("p").nth(0)
     booking_dates = page.locator("p").nth(1)
 
     expect(booking_request_pending_h1).to_have_text("Booking Request Pending...")
-    expect(booking_text_with_name).to_have_text("Your booking request for City Chic Loft is currently under review.")
-    expect(booking_dates).to_have_text("Requested Dates: 2024-01-01 to 2024-01-09")
+    expect(booking_text_with_name).to_have_text("Your booking request for City Chic Loft is confirmed.")
+    expect(booking_dates).to_have_text("Dates: 2024-01-01 to 2024-01-09")
 
 # tests if go back to hompepage works on booking confirmation page
 def test_go_back_homepage(page, test_web_address):
@@ -140,17 +141,15 @@ def test_go_back_homepage(page, test_web_address):
 
     start_date_input = page.locator("input#start_date")
     end_date_input = page.locator("input#end_date")
-    user_id_input = page.locator("input#user_id")
 
     start_date_input.fill("2024-01-01")
     end_date_input.fill("2024-01-09")
-    user_id_input.fill("3")
 
-    request_booking_button = page.locator("input[type='submit']")
+    request_booking_button = page.locator("button")
     request_booking_button.click()
 
-    back_to_homepage_link = page.locator("a")
-    back_to_homepage_link.click()
+    back_to_homepage_button = page.locator("button")
+    back_to_homepage_button.click()
     assert page.url == f"http://{test_web_address}/home"
 
 
