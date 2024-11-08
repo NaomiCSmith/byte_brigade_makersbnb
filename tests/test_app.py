@@ -57,13 +57,14 @@ def test_post_new_listing(page, test_web_address, db_connection):
     page.fill("input[name=name]", 'Test Listing')
     page.fill("input[name=description]", "Test description")
     page.fill("input[name=price]", "100")
+    page.fill("input[name=user_id]", "1")
     page.click("input[type=submit]")
     
     expect(page.locator("h3").nth(3)).to_have_text("4: Test Listing")
     
     page.click("text=4: Test Listing")
     
-    expect(page.locator("h1")).to_have_text("Request a booking")
+    expect(page.locator("h2")).to_have_text("Test Listing")
     # expect(page.locator("h2")).to_have_text("Description: Test description")
     # expect(page.locator("p")).to_have_text("Price per night(GBP): £100")
 
