@@ -4,48 +4,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Signup - MakersBnB</title>
-  <link rel="stylesheet" href="../static/style.css">
+  <link rel="stylesheet" href="../static/final_style.css">
 </head>
 <body>
   <!-- Navigation Bar -->
-  <header>
-    <nav class="navbar">
-        <!-- <a href="{{ url_for('index') }}" class="logo"> -->
-        <a href="/landing" class="logo">
-        <img src="../static/images/makersbnb.svg" alt="MakersBnB Logo">
-      </a>
-      <ul class="nav-links">
-        <li><a href="/login">Login</a></li>
-        <li><a href="/sign_up">Signup</a></li> 
-      </ul>
-    </nav>
-  </header>
+  <div class="navbar">
+    <div class="logo">
+        <a href="/home">
+        <img src="../static/images/makersbnb_white.svg" alt="Logo"> <!-- Logo Placeholder -->
+    </a>
+    </div>
+    <div class="nav-links">
+        <a href="/home">Properties</a>
+        <a href="/add_listing">Create listing</a>
+        <a href="/sign_up">Sign up</a>
+        <a href="/login">Log in</a>
+        <a href="#">My account</a>
+    </div>
+</div>
 
-        {% if errors %}
-        <div class = "errors-class">
-            {{errors}}
-        </div>
-        {% endif %}
+        
 
 <!-- Signup Form -->
-<div class="form-container">
-    <h2>Signup</h2>
-    <form action="/sign_up" method="POST">
-      <div class="field">
+<div class="container-stacked">
+
+  <h2>Create an Account</h2>
+  <form action="/sign_up" method="POST">
+    <p>
         <input type="text" name="username" id="username" placeholder="Username">
-      </div>
-      <div class="field">
+    </p>
+
+    <p>
         <input type="text" name="email" id="email" placeholder="Email Address">
-      </div>
-      <div class="field">
-        <input type="password" name="password" id="password" placeholder="Password">
-      </div>
-      <div class="field btn">
+    </p>
+
+    <p>
+        <input type="password" name="password" id="password" placeholder="Password: must be at least 7 characters long and contain a special character">
+    </p>
+
+    {% if errors %}
+    <div class = "errors-class" style="color:red">
+        {{errors}}
+    </div>
+    {% endif %}
+
+    <!-- Submit Button -->
+    <p>
         <input type="submit" value="Create account" class="submit-button">
-        <!-- <div class="field btn">
-            <input type="submit" value="Signup"> -->
-      </div>
-    </form>
+    </p>
+    <br>
+</form>
     
   </div>
 </body>

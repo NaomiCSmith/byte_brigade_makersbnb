@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Pending</title>
+    <link rel="stylesheet" href="../static/final_style.css">
+
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <a href="/home">
+            <img src="../static/images/makersbnb_white.svg" alt="Logo"> <!-- Logo Placeholder -->
+        </a>
+        </div>
+        <div class="nav-links">
+            <a href="/home">Properties</a>
+            <a href="/sign_up">Sign up</a>
+            <a href="/login">Log in</a>
+            <a href="#">My account</a>
+        </div>
+    </div>
+    <div class="container-stacked">
+        <h2>Booking Confirmed!</h2>
+        <p>Your booking request for {{ name }} is confirmed.</p>
+        <p>Dates: {{ start_date }} to {{ end_date }}</p>
+        <div class="footer">
+            <a class="button" style="font-family: futura;" href="/home">Other properties</a>
+        </div>
+    </div>
+</body>
+</html>
