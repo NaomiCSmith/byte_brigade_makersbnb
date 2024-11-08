@@ -73,7 +73,7 @@
         <p>Price per night</strong>
             <br>
         {% for error in errors %}
-            <p class="error">{{ error }}</p>
+            <p style="color: red" class="error">{{ error }}</p>
         {% endfor %}
     <form action="/request_booking/{{ id }}" method="POST">
         <div class="input-group" style="font-family: futura;">

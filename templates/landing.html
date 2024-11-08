@@ -4,31 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MakersBnB - Welcome</title>
-  <link rel="stylesheet" href="../static/style.css">
+  <link rel="stylesheet" href="../static/final_style.css">
 </head>
 
 
 
 <body>
-  <!-- Navigation Bar -->
-  <header>
-    <nav class="navbar">
-      <a href="/landing" class="logo">
-        <img src="../static/images/makersbnb.svg" alt="MakersBnB Logo">
-      </a>
-      <ul class="nav-links">
-        <li><a href="/login">Login</a></li>
-        <li><a href="/sign_up">Signup</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- Splash Content -->
-  <section class="splash">
-    <div class="splash-content">
-      <h1>Welcome to MakersBnB</h1>
-      <p>Discover unique stays and experiences.</p>
+  <div class="navbar">
+    <div class="logo">
+        <a href="/home">
+        <img src="../static/images/makersbnb_white.svg" alt="Logo"> <!-- Logo Placeholder -->
+    </a>
     </div>
-  </section>
+    <div class="nav-links">
+        <a href="/home">Properties</a>
+        <a href="/add_listing">Create listing</a>
+        <a href="/sign_up">Sign up</a>
+        <a href="/login">Log in</a>
+        <a href="#">My account</a>
+    </div>
+</div>
+<div class="hero-container">
+  <img  src="../static/images/unsplash.jpg" class="hero-image" alt="Hero Image">
+  <div class="hero-text">
+      <img src="../static/images/makersbnb_white.svg" style="width: 75%">
+      <br>
+      <br>
+      <p style="font-size: 2.5em; color: white"></style>Welcome to makersbnb </p>
+      <a href="/sign_up" class="button" style="color: white; font-weight: 50;">Sign up</a>
+      <a href="/login" class="button" style="color: white; font-weight: 50;">Log in</a>
+  </div>
+</div>
 </body>
 </html>
