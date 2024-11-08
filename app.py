@@ -15,6 +15,14 @@ app = Flask(__name__)
 
 # == Your Routes Here ==
 
+# GET /home
+# Returns the homepage
+# Try it:
+#   ; open http://localhost:5001/home
+# @app.route('/home', methods=['GET'])
+# def get_home():
+#     return render_template('home.html')
+
 @app.route('/add_listing', methods=['GET'])
 def get_add_listing():
     return render_template('add_listing.html')
@@ -84,8 +92,7 @@ def post_new_listing():
     name = request.form['name']
     description = request.form['description']
     price = int(request.form['price'])
-    # user_id = request.form['user_id'] #TODO#
-    user_id = 1
+    user_id = request.form['user_id']
     listing = Listing(None, name, description, price, user_id)
 
     if not listing.is_valid():
@@ -140,7 +147,33 @@ def create_account():
 def has_invalid_user_parameters(form):
     return 'username' not in form or \
         'email' not in form or \
-            'password' not in form
+            'password' not in form            
+            
+@app.route('/landing')
+def index():
+    return render_template('landing.html')
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/login', methods=['POST'])
+def login_account():
+    connection = get_flask_database_connection(app)
+    repository = UserRepository(connection)
+
+    email = request.form.get('email')
+    password_value = request.form.get('password')
+    
+    user_check = repository.find_by_email(email)
+    if user_check is None:
+        return render_template('sign_up.html')
+
+    if user_check.password != password_value:
+        return render_template('login.html')
+    return redirect(f"/home")
+
+
 
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database
