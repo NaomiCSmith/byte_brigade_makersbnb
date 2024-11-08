@@ -32,14 +32,14 @@ class Booking:
     def generate_errors(self):
         errors = []
         if self.check_in < datetime.now().date():
-            errors.append("Start date cannot be in the past!")
+            errors.append("* Start date cannot be in the past!")
         elif self.check_out <= self.check_in:
-            errors.append("End date must be after your start date!")
+            errors.append("* End date must be after your start date!")
         elif self.check_in == None:
-            errors.append("Please enter a start date!")
+            errors.append("* Please enter a start date!")
         elif self.check_out == None:
-            errors.append("Please enter a end date!")
+            errors.append("* Please enter a end date!")
         elif self.check_in == None and self.check_out == None:
-            errors.append("Please enter a start and end date!")
+            errors.append("* Please enter a start and end date!")
 
         return errors
