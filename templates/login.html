@@ -4,25 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - MakersBnB</title>
-  <link rel="stylesheet" href="../static/style.css">
+  <link rel="stylesheet" href="../static/final_style.css">
 </head>
 <body>
   <!-- Navigation Bar -->
   <header>
-    <nav class="navbar">
-        <a href="/landing" class="logo">
-        <img src="../static/images/makersbnb.svg" alt="MakersBnB Logo">
+    <div class="navbar">
+      <div class="logo">
+          <a href="/home">
+          <img src="../static/images/makersbnb_white.svg" alt="Logo"> <!-- Logo Placeholder -->
       </a>
-      <ul class="nav-links">
-
-        <li><a href="/login">Login</a></li>
-        <li><a href="/sign_up">Signup</a></li> 
-      </ul>
-    </nav>
+      </div>
+      <div class="nav-links">
+          <a href="/home">Properties</a>
+          <a href="/add_listing">Create listing</a>
+          <a href="/sign_up">Sign up</a>
+          <a href="/login">Log in</a>
+          <a href="#">My account</a>
+      </div>
+  </div>
   </header>
 
   <!-- Login Form -->
-  <div class="form-container">
+  <div class="container-stacked">
     <h2>Login</h2>
     <form action="/login" method="POST">
       <div class="field">
@@ -32,7 +36,7 @@
         <input type="password" placeholder="Password" name="password" required>
       </div>
       <div class="field btn">
-        <input type="submit" value="Login">
+        <input class="submit-button" type="submit" value="Login">
       </div>
     </form>
   </div>
