@@ -5,131 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../static/images/favicon.png">
     <title>Makersbnb | Add a Listing</title>
-    <style>
-        /* Center-align all content inside the body */
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f3f4f6;
-        }
-
-        /* Main form container */
-        .form-container {
-            width: 100%;
-            background: #fff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Headings */
-        h1 {
-            font-size: 2em;
-            text-align: center;
-            color: #333;
-        }
-
-        h2 {
-            font-size: 1.5em;
-            color: #555;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #e0e0e0;
-            padding-bottom: 8px;
-        }
-
-        /* Input field and label styling */
-        label {
-            display: block;
-            font-weight: bold;
-            margin-top: 20px;
-            color: #333;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 12px;
-            margin-top: 6px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1em;
-            box-sizing: border-box;
-        }
-
-        /* Instructions under labels */
-        .instructions {
-            font-size: 0.9em;
-            color: #777;
-            margin-top: 4px;
-        }
-
-        /* Submit button styling */
-        .submit-button {
-            width: 100%;
-            padding: 14px;
-            background-color: #4CAF50;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            font-size: 1.1em;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: background-color 0.3s ease;
-        }
-
-        .submit-button:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <link rel="stylesheet" href="../static/final_style.css">
 </head>
 <body>
-    <div class="form-container">
-        <h1>Create a New Listing</h1>
+    <div class="navbar">
+        <div class="logo">
+            <a href="/home">
+            <img src="../static/images/makersbnb_white.svg" alt="Logo"> <!-- Logo Placeholder -->
+        </a>
+        </div>
+        <div class="nav-links">
+            <a href="/home">Properties</a>
+            <a href="/add_listing">Create listing</a>
+            <a href="/sign_up">Sign up</a>
+            <a href="/login">Log in</a>
+            <a href="#">My account</a>
+        </div>
+    </div>
+
+    <div class="container-stacked">
         {% if errors %}
         <div class = "t-class">
             * {{errors}}
         </div>
         {% endif %}
-        <!-- Listing Details Section -->
-        <h2>Listing Details</h2>
-        <form action="/listings/new" method="POST">
-            <p>
-                <label for="name">Listing Name</label>
-                <span class="instructions">Enter a name that describes your listing, e.g., 'Rose Cottage'</span>
-                <input type="text" name="name" id="name">
-            </p>
+        {% if errors %}
+        <div class="errors-class">
+            * {{ errors }}
+        </div>
+        {% endif %}
+    
+        <!-- Form Container -->
+    
+            <h2>Create a New Listing</h2>
+    
+            <form action="/listings/new" method="POST">
+                <!-- Listing Details Section -->
+                <div class="field">
 
-            <p>
-                <label for="description">Description</label>
-                <span class="instructions">Describe the features and atmosphere of your listing, e.g., 'A cozy cottage with a beautiful garden view.'</span>
-                <input type="text" name="description" id="description" style="height: 80px;">
-            </p>
-
-            <!-- Pricing Information Section -->
-            <h2>Pricing Information</h2>
-            <p>
-                <label for="price">Price per Night (GBP)</label>
-                <span class="instructions">Specify the nightly rate for renting this listing.</span>
-                <input type="text" name="price" id="price">
-            </p>
-
-            <!-- user_id section -->
-
-            <h2>User ID</h2>
-            <p>
-                <label for="user_id">User ID</label>
-                <span class="instructions">Please enter your user ID</span>
-                <input type="text" name="user_id" id="user_id">
-            </p>
-
-            <!-- Submit Button -->
-            <p>
-                <input type="submit" value="Add My Listing!" class="submit-button">
-            </p>
-        </form>
-    </div>
+                    <p style="text-align: left;" class="instructions">Enter a name that describes your listing, e.g., 'Rose Cottage'</p>
+                    <input type="text" name="name" id="name" placeholder="Listing Name">
+                </div>
+                <br>
+                <br>
+                <div class="field">
+                    <p style="text-align: left;" class="instructions">Describe the features and atmosphere of your listing, e.g., 'A cozy cottage with a beautiful garden view.'</p>
+                    <input type="text" name="description" id="description" placeholder="Description" style="height: 80px;">
+                </div>
+                <br>
+                <br>
+                <!-- Pricing Information Section -->
+                <div class="field">
+                    <p style="text-align: left;" class="instructions">Specify the nightly rate for renting this listing.</p>
+                    <input type="text" name="price" id="price" placeholder="£ Price per Night">
+                </div>
+                <br>
+                <p>
+                    <p style="text-align: left;" class="instructions">Please enter your user ID</p>
+                    <input type="text" name="user_id" id="user_id" placeholder="e.g. 1">
+                </p>
+                <!-- Submit Button -->
+                <div class="field btn">
+                    <input type="submit" value="Add my listing" class="submit-button">
+                </div>
+            </form>
 </body>
 </html>

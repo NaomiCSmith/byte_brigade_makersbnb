@@ -6,77 +6,50 @@
     <link rel="icon" type="image/x-icon" href="../static/images/favicon.png">
     <head>
         <title>Makersbnb | Home </title>
+        <link rel="stylesheet" href="../static/final_style.css">
     </head>
-    <style>
-        /* Headings */
-        h1 {
-            font-size: 5em;
-            text-align: center;
-            color: #333;
-            font-family: Arial, sans-serif;
-        }
-
-        h2 {
-            font-size: 1.5em;
-            color: #555;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #e0e0e0;
-            padding-bottom: 8px;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-
-        h3, p {
-            font-size: 1.5em;
-            color: #555;
-            margin-bottom: 10px;
-            /* border-bottom: 1px solid #e0e0e0; */
-            padding-bottom: 8px;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-
-        /* Button styling */
-        .button {
-            display: block;
-            margin: 20px auto; /* Center horizontally */
-            width: 30%;
-            padding: 14px;
-            background-color: #4CAF50;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            font-size: 1em;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .button:hover {
-            background-color: #45a049;
-        }
-
-        .button-anchor{
-            color: #fff;
-        }
-
-    </style>
-    
-    <body>
-        <!-- <img src="images/makersbnb.png"> Placeholder while I try to get this to work-->
-        <h1>MakersBnB</h1>
-        <h2>Discover your next getaway!</h2> 
-        <button class="button">
-            <a href="/add_listing" class="button-anchor">Add a property</a>
-        </button>
-        <p>Have a peek at our available properties:</p>
+    <body class="body2">
+        <div class="navbar">
+            <div class="logo">
+                <a href="/home">
+                <img src="../static/images/makersbnb_white.svg" alt="Logo"> <!-- Logo Placeholder -->
+            </a>
+            </div>
+            <div class="nav-links">
+                <a href="/home">Properties</a>
+                <a href="/add_listing">Create listing</a>
+                <a href="/sign_up">Sign up</a>
+                <a href="/login">Log in</a>
+                <a href="#">My account</a>
+            </div>
+        </div>
+        <div class="hero-container">
+            <img src="../static/images/unsplash.jpg" class="hero-image" alt="Hero Image">
+            <div class="hero-text">
+                <img src="../static/images/makersbnb_white.svg" style="width: 75%">
+                <br>
+                <br>
+                <p style="font-size: 2.5em; color: white"></style>Discover your next getaway </p>
+                <p style="font-size: 1.5em; color: white; font-weight: 50;">Unforgettable stays, just a click away</p>
+            </div>
+        </div>
+        <br>
+        <br>
     {% for listing in listings %}
-        <div>
-        <h3>
-            <a href="/request_booking/{{listing.id}}">{{listing.id}}: {{listing.name}}</a>
-        </h3>
+        <div class="container-adjacent" style="padding-bottom: 24px;">
+            <div class="column left">
+                <img class="property-image" src="../static/images/pushpinder-pal-singh-I697rufpaZo-unsplash.jpg">
+            </div>
+            <div class="container-stacked2">
+        <h4> {{listing.name}}</h4>
+                <p class="listinginfo2" style="text-align: left;"> {{listing.description}}</p>
+        <a class="property-button" href="/request_booking/{{listing.id}}">More details +</a>
+        </div>
+        </div>
         </div>
 
     {% endfor %}
+
 
     </body>
 
