@@ -14,17 +14,23 @@
           </a>
           <ul class="nav-links">
 
-
           </ul>
         </nav>
       </header>
     <div class="form-container">
         <h2>Request a booking</h2>
-
+        
         <div class="field">
             <p><strong>Listing name:</strong> {{ name }}</p><br>
             <p><strong>Description:</strong> {{ description }}</p><br>
             <p><strong>Price per night:</strong> £{{ price }}</p>
+        {% if errors %}
+            <div class="error-message">
+                {% for error in errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
         </div>
         
         <form action="/request_booking/{{ id }}" method="POST">
@@ -37,8 +43,8 @@
                 <input type="date" id="end_date" name="end_date" required>
             </div>
             <div class="field">
-                <input type="text" placeholder="User ID" required>
-              </div>
+                <input id="user_id" type="number" placeholder="User ID" required>
+            </div>
             <div class="field btn">
                 <input type="submit" value="Request Booking">
             </div>
