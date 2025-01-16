@@ -23,6 +23,10 @@ app = Flask(__name__)
 # def get_home():
 #     return render_template('home.html')
 
+@app.route('/')
+def root():
+    return redirect(url_for('index'))  # This will redirect to your /landing route
+
 @app.route('/add_listing', methods=['GET'])
 def get_add_listing():
     return render_template('add_listing.html')
